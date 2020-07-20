@@ -36,7 +36,6 @@ job_template_name_osp_instances: "02_Provision QA Env"
 osp_instances_playbook: site-osp-instances.yml
 
 job_template_name_3tier_app: "04_3tier app deployment on QA Env"
-
 # ñ also suitable for AWS deploy
 app_deploy_playbook: site-3tier-app.yml
 
