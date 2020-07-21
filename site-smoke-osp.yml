@@ -1,38 +1,9 @@
-- hosts: workstation
-  gather_facts: false
-  roles:
-  - name: osp-facts
-
-
-  tasks:
-  - name: OpenStack servers
-
-
-  - name: Curl website
-  hosts: frontends
-  become: yes
-  roles:
-    - {name: base-config, tags: base-config}
-    - {name: lb-tier, tags: [lbs, haproxy]}
-
-
-- hosts: workstation
-  gather_facts: false
-  tasks:
-  - name: OpenStack servers
-
-  - name: Fail if 'Ansible has done its job' is not in the page content
-    fail:
-    when: "'Ansible has done its job' not in webpage.results[0].content"
-    tags:
-      - osp.smoke
-
-
 - hosts: localhost
   gather_facts: false
   vars:
     OSP_GUID: "{{ lookup('env','OSP_GUID') }}"
     OSP_DOMAIN: "{{ lookup('env','OSP_DOMAIN') }}"
+    TOWER_GUID: "{{ lookup('env','TOWER_GUID') }}"
   tasks:
   - name: Create In-memory Inventory
     add_host: 
@@ -40,7 +11,7 @@
       group: workstation
       ansible_ssh_private_key_file: ~/.ssh/openstack.pem
       ansible_ssh_user: cloud-user
- 
+
 - hosts: workstation
   gather_facts: false
   tasks:
@@ -49,11 +20,11 @@
       cloud: openstack
       server: 'frontend'
     register: openstack_info
-  
+
   - name: Check if all osp instance exist
     debug: "{{ openstack_info.openstack_servers | length }}"
     register: osp_instance
-  
+
   - debug: var=osp_instance
 
   - name: Curl website
@@ -63,14 +34,11 @@
       return_content: yes
     when: 'item.hostname == "frontend"'
     loop: "{{ openstack_info.openstack_servers }}"
-    register: qa_webpage
+    register: webpage
     ignore_errors: yes
 
-  - name: Fail
+  - name: Fail if 'Ansible has done its job' is not in the page content
     fail:
-    when: "'Ansible' not in qa_webpage.results[0].content" 
+    when: "'Ansible has done its job' not in webpage.results[0].content"
     tags:
       - osp.smoke
-
-  - name: Success
-    debug: msg="'Ansible' has done its job qa_webpage.results[0].content"
