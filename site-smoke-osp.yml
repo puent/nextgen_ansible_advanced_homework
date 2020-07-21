@@ -14,6 +14,9 @@
 
 - hosts: workstation
   gather_facts: false
+  vars:
+    OSP_GUID: "{{ lookup('env','OSP_GUID') }}"
+    OSP_DOMAIN: "{{ lookup('env','OSP_DOMAIN') }}"
   tasks:
   - name: OpenStack servers
     os_server_info:
