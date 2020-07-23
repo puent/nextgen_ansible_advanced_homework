@@ -26,6 +26,7 @@ ssh_cred_name: "Connect_to_workstation"
 instance_group_name: osp
 user_cred_name: "cloud-user"
 user_cred_path: "/root/.ssh/openstack.pem"
+own_repo_base: "{{ param_repo_base }}"
 
 # AWS common vars 
 ec2_dynamic_inventory: "Prod Three tier inventory"
