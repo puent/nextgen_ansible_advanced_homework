@@ -12,7 +12,7 @@
     flavor: "{{ item.0.flavor }}"
     security_groups: "{{ item.0.security_group }}"
     delete_fip: yes
-    wait: no
+    wait: yes
     nics:
       - net-name: int_network
     meta: "{{ item.1 }}"
