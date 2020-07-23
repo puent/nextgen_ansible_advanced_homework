@@ -36,7 +36,7 @@
     --playbook "{{app_deploy_playbook}}" 
     --credential "{{ssh_cred_name}}" 
     --vault-credential "yum-repo-cred"
-    --extra-vars "own_repo_path={{param_repo_base}}"
+    --extra-vars "own_repo_base={{param_repo_base}}"
 
 
 - name: Associate IG to 3tier job template  
@@ -126,7 +126,7 @@
     --project "{{proj_name}}" 
     --playbook "{{app_deploy_playbook}}"  
     --vault-credential "yum-repo-cred"
-    --extra-vars own_repo_path={{param_repo_base}}
+    --extra-vars "own_repo_base={{param_repo_base}}"
 
 
 - name: Job template for smoke test aws instances
