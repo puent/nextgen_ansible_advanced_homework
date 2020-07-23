@@ -12,7 +12,7 @@
   command: >-
     tower-cli job_template create 
     --name "{{job_template_name_osp_instances}}" 
-    --description "\{\{ñjob_template_desc_osp_instances\}\}" 
+    --description "{{job_template_desc_osp_instances}}" 
     --job-type run 
     --inventory "{{static_inventory_name}}" 
     --project "{{proj_name}}" 
