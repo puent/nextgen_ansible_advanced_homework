@@ -3,7 +3,7 @@
 # vars file for roles/config-tower
 
 proj_name: "00_Homework Assignment"
-proj_desc: "Project for Homework Assignment Lab"
+proj_desc: "Project for Homework Assignment"
 org_name: Default 
 scm_type: "git"
 scm_url: "{{ github_repo }}"
