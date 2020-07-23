@@ -27,6 +27,8 @@ instance_group_name: osp
 user_cred_name: "cloud-user"
 user_cred_path: "/root/.ssh/openstack.pem"
 own_repo_base: "{{ param_repo_base }}"
+##own_repo_path: "{{ lookup('env','JQ_REPO_BASE') }}"
+
 
 # AWS common vars 
 ec2_dynamic_inventory: "Prod Three tier inventory"
